@@ -6,8 +6,9 @@ var ground1
 var division1,division2,division3,division4;
 var division5,division6,division7,division8;
 var division9,division10,division11,division12;
-var division13;
-var plinko1
+var division13,plinko1,part1;
+var plinkos = [];
+var particles = [];
 function preload()
 {
 	
@@ -37,9 +38,32 @@ function setup() {
     division12 = new Division(440,800,5,400);
     division13 = new Division(480,800,5,400);
     
-    plinko1 = new Plinko(200,200)
+    //plinko1 = new Plinko(200,200)
 
+   for (var j = 35; j <=width; j=j+50) 
+    {
+    
+       plinkos.push(new Plinko(j,75));
+    }
 
+    for (var j = 10; j <=width-10; j=j+50) 
+    {
+    
+       plinkos.push(new Plinko(j,175));
+    }
+
+     for (var j = 35; j <=width; j=j+50) 
+    {
+    
+       plinkos.push(new Plinko(j,275));
+    }
+
+     for (var j = 10; j <=width-10; j=j+50) 
+    {
+    
+       plinkos.push(new Plinko(j,375));
+    }
+    part1 = new Particle(200,200,10)
 
 
     
@@ -51,6 +75,8 @@ function setup() {
 function draw() {
   rectMode(CENTER);
   background(0,0,0);
+ 
+
   ground1.display();
   division1.display();
   division2.display();
@@ -65,8 +91,22 @@ function draw() {
   division11.display();
   division12.display();
   division13.display();
+  part1.display();
 
-  plinko1.display();
+  if(frameCount%60===0){
+     particles.push(new Particle(random(100,300), 0,10));
+     
+   }
+
+  for (var i = 0; i < plinkos.length; i++) {
+     
+     plinkos[i].display();
+     
+   }
+   for (var j = 0; j < particles.length; j++) {
+   
+     particles[j].display();
+   }
 
 
   drawSprites();
